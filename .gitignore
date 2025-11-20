@@ -1,0 +1,39 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# --- Virtual Environment ---
+env/
+venv/
+
+# --- Django ---
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+
+# --- Media & Static ---
+media/
+staticfiles/
+
+# Local environment settings
+.env
+*.env
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.iml
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db
+
+# --- Migrations (optional) ---
+# Uncomment if you don't want early migration files in GitHub
+# */migrations/*.py
+# !*/migrations/__init__.py
