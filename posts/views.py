@@ -15,6 +15,7 @@ def create_post(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 # List all Posts.
 @api_view(['GET'])
 def list_posts(request):    
@@ -36,6 +37,7 @@ def update_post(request, pk):       # pk is primary key(id) of the post to be up
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # Delete Post.
