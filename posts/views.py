@@ -4,6 +4,7 @@ from rest_framework import status
 from .models import Post
 from .serializers import PostSerializer
 from django.shortcuts import render
+from django.http import JsonResponse
 
 # Create Post.
 
@@ -50,3 +51,19 @@ def delete_post(request, pk):
 
     post.delete()
     return Response({"message": "Post deleted successfully"})
+
+
+def detail_post(request, pk):
+    try:
+        post = Post.objects.get(id=pk)
+        data = {
+            "id": post.id,
+            "title": post.title,
+            "description": post.description,
+            "due_date": post.due_date,
+            "priority": post.priority,
+            "status": post.status,
+        }
+        return JsonResponse(data, safe=False)
+    except Post.DoesNotExist:
+        return JsonResponse({"error": "Task not found"}, status=404)

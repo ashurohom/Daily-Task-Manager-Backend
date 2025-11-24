@@ -16,3 +16,12 @@ urlpatterns = [
     path('api/posts/', include('posts.urls')),  # Posts API
     path('run-migrations/', run_migrations), # Manual migrations URL
 ]
+
+
+# Base URL : https://daily-task-manager-backend-production.up.railway.app/
+# Admin Panel : https://daily-task-manager-backend-production.up.railway.app/admin/
+# Create Post : https://daily-task-manager-backend-production.up.railway.app/api/posts/create/
+# List Posts : https://daily-task-manager-backend-production.up.railway.app/api/posts/list/
+# Update Post : https://daily-task-manager-backend-production.up.railway.app/api/posts/update/1/
+# Delete Post : https://daily-task-manager-backend-production.up.railway.app/api/posts/delete/1/
+# Run Migrations : https://daily-task-manager-backend-production.up.railway.app/run-migrations/
