@@ -53,17 +53,17 @@ def delete_post(request, pk):
     return Response({"message": "Post deleted successfully"})
 
 
-def detail_post(request, pk):
-    try:
-        post = Post.objects.get(id=pk)
-        data = {
-            "id": post.id,
-            "title": post.title,
-            "description": post.description,
-            "due_date": post.due_date,
-            "priority": post.priority,
-            "status": post.status,
-        }
-        return JsonResponse(data, safe=False)
-    except Post.DoesNotExist:
-        return JsonResponse({"error": "Task not found"}, status=404)
+# def detail_post(request, pk):
+#     try:
+#         post = Post.objects.get(id=pk)
+#         data = {
+#             "id": post.id,
+#             "title": post.title,
+#             "description": post.description,
+#             "due_date": post.due_date,
+#             "priority": post.priority,
+#             "status": post.status,
+#         }
+#         return JsonResponse(data, safe=False)
+#     except Post.DoesNotExist:
+#         return JsonResponse({"error": "Task not found"}, status=404)
