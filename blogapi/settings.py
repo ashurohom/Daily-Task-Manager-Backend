@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'posts',
-    "corsheaders",
+    'corsheaders',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -66,7 +66,22 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://daily-task-manager-backend-production.up.railway.app/",  # Add your actual frontend domain
+]
 
+# Allow specific methods and headers
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 ROOT_URLCONF = 'blogapi.urls'
 
