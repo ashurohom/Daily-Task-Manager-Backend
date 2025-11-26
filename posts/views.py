@@ -18,15 +18,21 @@ def create_post(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# posts/views.py - UPDATE run_migrations function
 @api_view(['GET'])
 def run_migrations(request):
     try:
-        call_command('migrate', '--noinput')
+        from django.core.management import call_command
+        import os
+        
+        # Reset and create fresh migrations
         call_command('makemigrations', 'posts', '--noinput')
         call_command('migrate', 'posts', '--noinput')
+        call_command('migrate', '--noinput')
+        
         return JsonResponse({"message": "Migrations completed successfully!"})
     except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
+        return JsonResponse({"error": str(e), "detail": "Migration failed"}, status=500)
     
 
 # List all Posts.
