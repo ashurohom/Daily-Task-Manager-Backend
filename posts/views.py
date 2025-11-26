@@ -9,10 +9,19 @@ from django.core.management import call_command
 import traceback
 
 # Create Post
+# posts/views.py - ENHANCED ERROR LOGGING
 @api_view(['POST'])
 def create_post(request):
     try:
         print("📝 CREATE POST - Received data:", request.data)
+        print("📝 Data types:", {k: type(v) for k, v in request.data.items()})
+        
+        # Validate required fields
+        if not request.data.get('title'):
+            return Response(
+                {"error": "Title is required"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
         serializer = PostSerializer(data=request.data)
         
@@ -23,16 +32,21 @@ def create_post(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print("❌ Validation errors:", serializer.errors)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {
+                    "error": "Validation failed",
+                    "details": serializer.errors
+                }, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
             
     except Exception as e:
         print("💥 CREATE POST ERROR:", str(e))
         print("Traceback:", traceback.format_exc())
         return Response(
             {
-                "error": str(e),
-                "detail": "Internal server error in create_post",
-                "received_data": request.data
+                "error": "Internal server error",
+                "message": str(e)
             }, 
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )

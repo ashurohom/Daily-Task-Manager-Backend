@@ -1,3 +1,4 @@
+# posts/models.py - CORRECTED VERSION
 from django.db import models
 
 class Post(models.Model):
@@ -16,9 +17,10 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     due_date = models.DateField(blank=True, null=True)
-    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default="low")
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default="medium")  # ← CHANGED from 10 to 20
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)  # ← ADDED missing field
 
     def __str__(self):
         return self.title
