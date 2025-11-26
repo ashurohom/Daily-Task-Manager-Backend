@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -68,11 +68,11 @@ MIDDLEWARE = [
 ]
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "https://daily-task-manager-backend-production.up.railway.app",  # ← REMOVED TRAILING SLASH
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://localhost:5173",
+#     "https://daily-task-manager-backend-production.up.railway.app",  # ← REMOVED TRAILING SLASH
+# ]
 
 # Optional: Additional CORS settings for better compatibility
 CORS_ALLOW_CREDENTIALS = True
