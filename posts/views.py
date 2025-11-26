@@ -5,6 +5,7 @@ from .models import Post
 from .serializers import PostSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core.management import call_command
 
 # Create Post.
 
@@ -16,6 +17,17 @@ def create_post(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['GET'])
+def run_migrations(request):
+    try:
+        call_command('migrate', '--noinput')
+        call_command('makemigrations', 'posts', '--noinput')
+        call_command('migrate', 'posts', '--noinput')
+        return JsonResponse({"message": "Migrations completed successfully!"})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+    
 
 # List all Posts.
 @api_view(['GET'])

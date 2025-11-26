@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
 from django.core.management import call_command
+from posts import views
 
 def home(request):
     return JsonResponse({"message": "Backend Running Successfully!"})
@@ -15,6 +16,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),         # Admin panel
     path('api/posts/', include('posts.urls')),  # Posts API
     path('run-migrations/', run_migrations), # Manual migrations URL
+    path('run-migrations/', views.run_migrations),  # Use this instead
 ]
 
 
