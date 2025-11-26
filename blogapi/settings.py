@@ -33,7 +33,8 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    os.environ.get("RAILWAY_PUBLIC_DOMAIN"),
+    "daily-task-manager-backend-production.up.railway.app",  # No https://
+    os.environ.get("RAILWAY_PUBLIC_DOMAIN", ""),
 ]
 
 
@@ -52,7 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -70,10 +71,23 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    "https://daily-task-manager-backend-production.up.railway.app/",  # Add your actual frontend domain
+    "https://daily-task-manager-backend-production.up.railway.app",  # ← REMOVED TRAILING SLASH
 ]
 
-# Allow specific methods and headers
+# Optional: Additional CORS settings for better compatibility
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -83,6 +97,12 @@ CORS_ALLOW_METHODS = [
     'PUT',
 ]
 
+# CSRF settings for APIs
+CSRF_TRUSTED_ORIGINS = [
+    "https://daily-task-manager-backend-production.up.railway.app",
+    "http://localhost:3000",
+    "http://localhost:5173",
+]
 ROOT_URLCONF = 'blogapi.urls'
 
 TEMPLATES = [
