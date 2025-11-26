@@ -15,7 +15,7 @@ urlpatterns = [
     path('', home),                          # Homepage JSON message
     path('admin/', admin.site.urls),         # Admin panel
     path('api/posts/', include('posts.urls')),  # Posts API
-    path('run-migrations/', run_migrations), # Manual migrations URL
+    # path('run-migrations/', run_migrations), # Manual migrations URL
     path('run-migrations/', views.run_migrations),  # Use this instead
 ]
 

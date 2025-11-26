@@ -38,18 +38,25 @@ def list_posts(request):
 
 
 # Update Post.
-@api_view(['PUT'])
-def update_post(request, pk):       # pk is primary key(id) of the post to be updated.
+@api_view(['GET', 'PUT'])  # ← ADD 'GET' HERE
+def update_post(request, pk):       
     try:
         post = Post.objects.get(pk=pk)
     except Post.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = PostSerializer(post, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
+    if request.method == 'GET':
+        # Return task data for editing
+        serializer = PostSerializer(post)
         return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'PUT':
+        # Update task data
+        serializer = PostSerializer(post, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
