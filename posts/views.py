@@ -30,7 +30,7 @@ def run_migrations(request):
         call_command('migrate', 'posts', '--noinput')
         call_command('migrate', '--noinput')
         
-        return JsonResponse({"message": "Migrations completed successfully!"})
+        return JsonResponse({"message": "Ashu Migrations completed successfully!"})
     except Exception as e:
         return JsonResponse({"error": str(e), "detail": "Migration failed"}, status=500)
     
